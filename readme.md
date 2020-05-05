@@ -18,7 +18,7 @@ A simple data aggregator that subscribes to data published by all actors/asynchr
     ```
        $ go build
        $ ls
-       $ ./Tesla
+       $ ./DataAggregator
     ```
 * The file output.log will contain the aggregated data form out actors.
 
