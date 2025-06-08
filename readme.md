@@ -1,24 +1,35 @@
 # Golang Data Aggregator
 
-A simple data aggregator that subscribes to data published by all actors/asynchronous processes.
-* There are 3 actors which are created as packages.
-    * Web actor
-    * Image actor
-    * Video actor
-* The models have required dataTypes for the data retrieved from each actor.
+This project simulates a data aggregation system for sensor streams. Multiple sensor actors (like temperature and pressure) push data into a centralized channel. 
+An aggregator collects this data and outputs it, while a supervisor listens for user input to gracefully shut the system down.
 
-## Setup 
-* Let's assume you created a program in `$GOPATH/src/example` directory:
-* Copy the project to your directory under `src/github.com/preveenmenon`
-* Navigate to your package's directory and use the go tool to build and run your code.
-* The quickest way to run it is using `go run:`
+## 🧠 Project Overview
 
-    `$ go run aggregator.go`
-* You can also build the project and run the executable file.
-    ```
-       $ go build
-       $ ls
-       $ ./DataAggregator
-    ```
-* The file output.log will contain the aggregated data form out actors.
+- **Actors**:
+  - `temperature`: Simulates temperature readings
+  - `pressure`: Simulates atmospheric pressure readings
+- **Aggregator**:
+  - Collects and logs all sensor data in real-time
+- **Supervisor**:
+  - Watches for user termination (via keyboard input) and cancels the entire process
+
+## 🚀 How It Works
+
+1. `main.go` starts all goroutines: pressure, temperature, aggregator, and supervisor.
+2. All sensors write to a shared channel.
+3. Aggregator reads from the channel and prints sensor data.
+4. Supervisor waits for any keyboard input (like hitting `Enter`) and stops the program.
+
+## ✅ Features
+
+- Concurrency using goroutines
+- Graceful shutdown with `context.Context`
+- Clean separation of responsibilities
+- Extendable design (easy to add more sensors)
+
+## 🛠️ Run Locally
+
+```bash
+go run ./cmd/main.go
+
 
